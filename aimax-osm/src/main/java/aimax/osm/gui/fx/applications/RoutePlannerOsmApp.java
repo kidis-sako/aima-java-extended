@@ -8,6 +8,7 @@ import aimax.osm.data.entities.MapNode;
 import aimax.osm.data.entities.Track;
 import aimax.osm.gui.fx.viewer.MapPaneCtrl;
 import aimax.osm.routing.RouteCalculator;
+import aimax.osm.routing.TimeDependentRouteCalculator;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -88,7 +89,7 @@ public class RoutePlannerOsmApp extends IntegrableApplication {
      * provide more advanced routing algorithms.
      */
     protected RouteCalculator createRouteCalculator() {
-        return new RouteCalculator();
+        return new TimeDependentRouteCalculator();
     }
 
 
@@ -123,8 +124,14 @@ public class RoutePlannerOsmApp extends IntegrableApplication {
         List<MapNode> nodes = track.getNodes();
         DecimalFormat f1 = new DecimalFormat("#0.00");
         double km = Position.getTrackLengthKM(nodes);
-        String info = track.getName() + ": Length " + f1.format(km)
-                + " km";
+        String info = track.getName() + ": Length " + f1.format(km) + " km";
+        
+        // Add travel time estimate if the current selection is "Time (Car)"
+        if (taskCombo.getSelectionModel().getSelectedIndex() == 3) {
+            double travelTime = TimeDependentRouteCalculator.calculateTravelTimeHours(nodes);
+            info += ", Est. Time: " + TimeDependentRouteCalculator.formatTravelTime(travelTime);
+        }
+        
         if (nodes.size() == 2) {
             DecimalFormat f2 = new DecimalFormat("#000");
             MapNode m1 = nodes.get(nodes.size() - 2);

@@ -2,7 +2,9 @@ package aima.core.search.online;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
 
@@ -64,6 +66,11 @@ public class LRTAStarAgent<P, S, A> extends SimpleAgent<P, A> {
 	/// s, a, the previous state and action, initially null
 	private S s = null;
 	private A a = null;
+	
+	// Add memory of recently visited states
+	private final Set<S> recentlyVisited = new HashSet<>();
+	private static final int MEMORY_SIZE = 3; // Remember last 3 states
+	private static final double BACKTRACK_PENALTY = 2.0; // Penalty for going back
 
 	/**
 	 * Constructs a LRTA* agent with the specified search problem, percept to
@@ -89,6 +96,15 @@ public class LRTAStarAgent<P, S, A> extends SimpleAgent<P, A> {
 	@Override
 	public Optional<A> act(P psPrimed) {
 		S sPrimed = ptsFn.apply(psPrimed);
+		
+		// Update recently visited states
+		if (s != null) {
+			recentlyVisited.add(s);
+			if (recentlyVisited.size() > MEMORY_SIZE) {
+				recentlyVisited.remove(recentlyVisited.iterator().next());
+			}
+		}
+
 		/// if GOAL-TEST(s') then return stop
 		if (problem.testGoal(sPrimed)) {
 			a = null;
@@ -108,8 +124,16 @@ public class LRTAStarAgent<P, S, A> extends SimpleAgent<P, A> {
 				H.put(s, min);
 			}
 			/// a <- an action b in ACTIONS(s') that minimizes LRTA*-COST(s', b, result[s', b], H)
-			a = problem.getActions((sPrimed)).stream()
-					.min(Comparator.comparingDouble(b -> lrtaCost(sPrimed, b, result.get(sPrimed, b))))
+			a = problem.getActions(sPrimed).stream()
+					.min(Comparator.comparingDouble(b -> {
+						S nextState = result.get(sPrimed, b);
+						double cost = lrtaCost(sPrimed, b, nextState);
+						// Add penalty if next state was recently visited
+						if (nextState != null && recentlyVisited.contains(nextState)) {
+							cost += BACKTRACK_PENALTY;
+						}
+						return cost;
+					}))
 					.orElse(null);
 		}
 		if (a == null)

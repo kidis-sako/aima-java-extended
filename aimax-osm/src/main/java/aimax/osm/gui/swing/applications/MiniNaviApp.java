@@ -28,6 +28,7 @@ import aimax.osm.gps.GpsLocator;
 import aimax.osm.gps.GpsPositionListener;
 import aimax.osm.gps.NmeaReader.MessageToFileListener;
 import aimax.osm.routing.RouteCalculator;
+import aimax.osm.routing.TimeDependentRouteCalculator;
 import aimax.osm.viewer.AbstractEntityRenderer;
 import aimax.osm.viewer.MapStyleFactory;
 import aimax.osm.gui.swing.viewer.MapViewFrame;
@@ -88,7 +89,7 @@ public class MiniNaviApp implements ActionListener {
 		routeCalculator = (RouteCalculator) createComponent(
 				ROUTECALCULATOR_CLASS_PROPERTY, RouteCalculator.class);
 		if (routeCalculator == null)
-			routeCalculator = new RouteCalculator();
+			routeCalculator = new TimeDependentRouteCalculator();
 
 		JToolBar toolbar = frame.getToolbar();
 		gpsCombo = new JComboBox<>(new String[] { "GPS Off", "GPS On",

@@ -15,7 +15,9 @@ import aimax.osm.data.MapEventListener;
 import aimax.osm.data.OsmMap;
 import aimax.osm.data.Position;
 import aimax.osm.routing.RouteCalculator;
+import aimax.osm.routing.TimeDependentRouteCalculator;
 import aimax.osm.gui.swing.viewer.MapViewFrame;
+import aimax.osm.data.entities.Track;
 
 /**
  * Implements a simple route planning tool. It extends the OSM map viewer by a
@@ -60,7 +62,7 @@ public class RoutePlannerApp implements ActionListener {
 	 * provide more advanced routing algorithms.
 	 */
 	protected RouteCalculator createRouteCalculator() {
-		return new RouteCalculator();
+		return new TimeDependentRouteCalculator();
 	}
 
 	public MapViewFrame getFrame() {
@@ -89,6 +91,22 @@ public class RoutePlannerApp implements ActionListener {
 			List<Position> positions = routeCalculator.calculateRoute(
 					map.getMarkers(), map, taskSelection.getSelectedIndex());
 			frame.getMap().createTrack(ROUTE_TRACK_NAME, positions);
+			
+			// Show time information if "Time (Car)" is selected
+			if (taskSelection.getSelectedIndex() == 3) {
+				Track track = map.getTrack(ROUTE_TRACK_NAME);
+				if (track != null) {
+					double km = Position.getTrackLengthKM(track.getNodes());
+					double travelTime = TimeDependentRouteCalculator.calculateTravelTimeHours(track.getNodes());
+					String timeStr = TimeDependentRouteCalculator.formatTravelTime(travelTime);
+					
+					String message = String.format("Route length: %.2f km\nEstimated travel time: %s", 
+							km, timeStr);
+					
+					javax.swing.JOptionPane.showMessageDialog(frame, message, 
+							"Route Information", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
 		}
 	}
 

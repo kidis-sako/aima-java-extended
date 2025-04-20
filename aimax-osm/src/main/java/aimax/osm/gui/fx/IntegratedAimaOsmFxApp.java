@@ -6,6 +6,7 @@ import aimax.osm.gui.fx.applications.OnlineAgentOsmApp;
 import aimax.osm.gui.fx.applications.ExtendedRouteFindingAgentOsmApp;
 import aimax.osm.gui.fx.applications.RoutePlannerOsmApp;
 import aimax.osm.gui.fx.applications.RouteFindingAgentOsmApp;
+import aimax.osm.gui.fx.applications.ExtendedOnlineAgentOsmApp;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -41,5 +42,6 @@ public class IntegratedAimaOsmFxApp extends Application {
 		builder.registerApp(RouteFindingAgentOsmApp.class);
 		builder.registerApp(ExtendedRouteFindingAgentOsmApp.class);
 		builder.registerApp(OnlineAgentOsmApp.class);
+		builder.registerApp(ExtendedOnlineAgentOsmApp.class);
 	}
 }

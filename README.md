@@ -29,6 +29,45 @@ The `TimeDependentRouteCalculator` (`aimax-osm/src/main/java/aimax/osm/routing/T
 - Travel time calculation and formatting utilities
 - Support for both distance and time-based route optimization
 
+### 4. Sudoku CSP Solver
+The Sudoku implementation demonstrates advanced Constraint Satisfaction Problem (CSP) solving techniques with three main components:
+
+#### Core Implementation (`SudokuCSP`)
+Located in `aima-core/src/main/java/aima/core/search/csp/examples/SudokuCSP.java`:
+- Implements the Sudoku puzzle as a CSP
+- Defines variables for each cell (81 total)
+- Sets up domains (1-9) for each variable
+- Adds three types of constraints:
+  - Row constraints (no duplicates in rows)
+  - Column constraints (no duplicates in columns)
+  - Box constraints (no duplicates in 3x3 boxes)
+- Provides methods for initializing puzzles and setting fixed values
+
+#### Command-line Demo (`SudokuCspDemo`)
+Located in `aima-gui/src/main/java/aima/gui/fx/applications/search/SudokuCspDemo.java`:
+- Demonstrates solving Sudoku using different strategies:
+  - Min-Conflicts search
+  - Backtracking with MRV, DEG, LCV, and AC3
+  - Simple backtracking
+- Shows step counts and performance metrics
+- Uses example puzzles from SimpleSudokuApp
+
+#### GUI Application (`SudokuCspApp`)
+Located in `aima-gui/src/main/java/aima/gui/fx/applications/search/SudokuCspApp.java`:
+- Provides interactive Sudoku solving with:
+  - Multiple puzzle selection
+  - Strategy selection (Backtracking, Min-Conflicts)
+  - Heuristic configuration:
+    - MRV (Minimum Remaining Values)
+    - DEG (Degree)
+    - LCV (Least Constraining Value)
+  - Inference method selection:
+    - Forward Checking
+    - AC3 (Arc Consistency)
+- Real-time visualization of solving process
+- Step-by-step solving with highlights
+- Performance monitoring
+
 ## Technical Improvements
 
 ### Java 17 Compatibility

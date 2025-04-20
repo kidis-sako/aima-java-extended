@@ -1,5 +1,4 @@
 package aima.gui.fx.applications.agent;
-
 import aima.core.agent.Action;
 import aima.core.environment.vacuum.GeneralizedVacuumAgent;
 import aima.core.environment.vacuum.GeneralizedVacuumEnvironment;

@@ -40,7 +40,8 @@ public class CspHeuristics {
     public static class MrvHeuristic<VAR extends Variable, VAL> implements VariableSelectionStrategy<VAR, VAL> {
 
         /** Returns variables from <code>vars</code> which are the best with respect to MRV. */
-        public List<VAR> apply(CSP<VAR, VAL> csp, List<VAR> vars) {
+        @Override
+		public List<VAR> apply(CSP<VAR, VAL> csp, List<VAR> vars) {
             List<VAR> result = new ArrayList<>();
             int minValues = Integer.MAX_VALUE;
             for (VAR var : vars) {
@@ -62,7 +63,8 @@ public class CspHeuristics {
     public static class DegHeuristic<VAR extends Variable, VAL> implements VariableSelectionStrategy<VAR, VAL> {
 
         /** Returns variables from <code>vars</code> which are the best with respect to DEG. */
-        public List<VAR> apply(CSP<VAR, VAL> csp, List<VAR> vars) {
+        @Override
+		public List<VAR> apply(CSP<VAR, VAL> csp, List<VAR> vars) {
             List<VAR> result = new ArrayList<>();
             int maxDegree = -1;
             for (VAR var : vars) {
@@ -84,7 +86,8 @@ public class CspHeuristics {
     public static class LcvHeuristic<VAR extends Variable, VAL> implements ValueOrderingStrategy<VAR, VAL> {
 
         /** Returns the values of Dom(var) in a special order. The least constraining value comes first. */
-        public List<VAL> apply(CSP<VAR, VAL> csp, Assignment<VAR, VAL> assignment, VAR var) {
+        @Override
+		public List<VAL> apply(CSP<VAR, VAL> csp, Assignment<VAR, VAL> assignment, VAR var) {
             List<Pair<VAL, Integer>> pairs = new ArrayList<>();
             for (VAL value : csp.getDomain(var)) {
                 int num = countLostValues(csp, assignment, var, value);

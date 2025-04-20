@@ -1,6 +1,7 @@
 package aima.core.search.csp.examples;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import aima.core.search.csp.Assignment;
@@ -23,14 +24,14 @@ public class DiffNotEqualConstraint implements Constraint<Variable, Integer> {
 		this.var1 = var1;
 		this.var2 = var2;
 		this.diff = diff;
-		scope = new ArrayList<Variable>(2);
+		scope = new ArrayList<>(2);
 		scope.add(var1);
 		scope.add(var2);
 	}
 
 	@Override
 	public List<Variable> getScope() {
-		return scope;
+		return Collections.unmodifiableList(scope);
 	}
 
 	@Override

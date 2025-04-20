@@ -104,6 +104,14 @@ public class SudokuViewCtrl {
         getCombo(col, row).setOpacity(b ? 0.5 : 1);
     }
 
+    public void setRedHighlight(int col, int row, boolean b) {
+        if (b) {
+            getCombo(col, row).setStyle("-fx-font: 18px \"Courier New\"; -fx-font-weight: bold; -fx-background-color: #ffcccc;");
+        } else {
+            getCombo(col, row).setStyle("-fx-font: 18px \"Courier New\"; -fx-font-weight: bold;");
+        }
+    }
+
     private ComboBox<String> getCombo(int col, int row) {
         assert col >= 1 && col <= 9;
         assert row >= 1 && row <= 9;

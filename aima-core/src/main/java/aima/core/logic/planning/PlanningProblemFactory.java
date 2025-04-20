@@ -1,13 +1,13 @@
 package aima.core.logic.planning;
 
 import aima.core.logic.fol.kb.data.Literal;
-import aima.core.logic.fol.parsing.ast.Constant;
 import aima.core.logic.fol.parsing.ast.Term;
 import aima.core.logic.fol.parsing.ast.Variable;
 import aima.core.logic.planning.hierarchicalsearch.HighLevelAction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -91,7 +91,7 @@ public class PlanningProblemFactory {
         Variable loc = new Variable("loc");
         Variable t = new Variable("t");
         ArrayList<Term> removeVars = new ArrayList<>(Arrays.asList(obj, loc));
-        ArrayList<Term> putOnVars = new ArrayList<>(List.of(t));
+        ArrayList<Term> putOnVars = new ArrayList<>(Collections.singletonList(t));
         ActionSchema removeAction = new ActionSchema("Remove", removeVars,
                 "At(obj,loc)",
                 "~At(obj,loc)^At(obj,Ground)");
@@ -137,7 +137,6 @@ public class PlanningProblemFactory {
     /**
      * Generates the Act HLA for a problem.
      *
-     * @param problem
      * @return The Act HLA.
      */
     public static HighLevelAction getHlaAct(PlanningProblem problem) {

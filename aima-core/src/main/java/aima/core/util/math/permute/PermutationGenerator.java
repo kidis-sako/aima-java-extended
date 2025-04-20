@@ -12,7 +12,7 @@ public class PermutationGenerator {
             return Collections.emptyList();
         long rfact = (long) PermutationGenerator.factorial(r);
         long total = (long) CombinationGenerator.nCr(list.size(), r) * rfact;
-        return () -> new Iterator<>() {
+        return () -> new Iterator<List<T>>() {
             int index = -1;
             int permNo = 0;
             int[] currPermutation = new int[r];

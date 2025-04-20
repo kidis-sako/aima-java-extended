@@ -48,7 +48,9 @@ public class GraphPlanAlgorithmTest {
         State initialState = new State("Device(Radio1)");
         State goalState = new State("On(Radio1)");
         Variable d = new Variable("d");
-        ActionSchema switchOnAction = new ActionSchema("switch-on", List.of(d),
+		List<aima.core.logic.fol.parsing.ast.Term> terms = new java.util.ArrayList<>();
+		terms.add(d);
+		ActionSchema switchOnAction = new ActionSchema("switch-on", terms,
                 "Device(d)^~On(d)",
                 "On(d)");
         PlanningProblem problem = new PlanningProblem(initialState, goalState.getFluents(), switchOnAction);

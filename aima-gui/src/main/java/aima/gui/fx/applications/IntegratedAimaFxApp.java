@@ -26,6 +26,7 @@ import aima.gui.fx.applications.search.games.TicTacToeApp;
 import aima.gui.fx.applications.search.local.GeneticMaximumFinderApp;
 import aima.gui.fx.applications.search.local.GeneticMaximumFinderDemo;
 import aima.gui.fx.applications.search.local.SimulatedAnnealingMaximumFinderApp;
+import aima.gui.fx.applications.agent.IntelligentVacuumAgentApp;
 import aima.gui.fx.framework.IntegratedAppBuilder;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -57,6 +58,7 @@ public class IntegratedAimaFxApp extends Application {
 
 	public static void defineContent(IntegratedAppBuilder builder) {
 		builder.registerApp(VacuumAgentApp.class);
+		builder.registerApp(IntelligentVacuumAgentApp.class);
 		builder.registerApp(RouteFindingAgentApp.class);
 		builder.registerApp(WumpusAgentApp.class);
 

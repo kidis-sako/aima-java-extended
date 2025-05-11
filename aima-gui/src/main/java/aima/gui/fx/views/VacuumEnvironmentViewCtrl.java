@@ -80,7 +80,7 @@ public class VacuumEnvironmentViewCtrl extends AbstractGridEnvironmentViewCtrl<V
     }
 
     @Override
-    protected void update() {
+	public void update() {
         VacuumEnvironment vEnv = ((VacuumEnvironment) env);
         for (String loc : vEnv.getLocations()) {
             SquareButton btn = getSquareButton(vEnv.getX(loc), vEnv.getY(loc));

@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- Runtime Dependencies -->
@@ -73,8 +73,8 @@
 				<version>2.3.2</version>
 				<configuration>
 					<fork>true</fork>
-					<source>${target.jdk.version}</source>
-					<target>${target.jdk.version}</target>
+					<source>17</source>
+					<target>17</target>
 					<debug>true</debug>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<showDeprecation>true</showDeprecation>

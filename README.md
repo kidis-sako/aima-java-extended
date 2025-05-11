@@ -12,7 +12,41 @@ The `GeneralizedVacuumAgentApp` (`aima-gui/src/main/java/aima/gui/fx/application
 - JavaFX-based visualization
 - Improved state management and environment interaction
 
-### 2. Extended Route Finding Agent OSM Application
+### 2. Intelligent Vacuum Agent
+The `IntelligentVacuumAgent` (`aima-core/src/main/java/aima/core/environment/vacuum/IntelligentVacuumAgent.java`) implements an advanced cleaning strategy with:
+
+#### Core Features:
+- **Mental Map Management**:
+  - Maintains a detailed map of visited locations
+  - Tracks cell states: CLEAN, DIRTY, OBSTACLE, UNKNOWN
+  - Updates boundaries dynamically for efficient exploration
+
+#### Decision Making:
+- **Priority-Based Targeting**:
+  1. Highest priority (100 points): Clean dirty cells
+  2. High priority (80 points): Explore unknown cells adjacent to visited areas
+  - Distance-based scoring for optimal path selection
+  - Obstacle avoidance with increased movement costs
+
+#### Path Planning:
+- **A* Path Finding**:
+  - Optimal path calculation to targets
+  - Cost considerations for turning and obstacles
+  - Efficient exploration of unknown areas
+
+#### Stopping Conditions:
+- Stops when either:
+  1. No known dirty cells AND stuck in a loop (5 repetitions)
+  2. No known dirty cells AND no unexplored adjacent cells after 20 moves
+- Prevents unnecessary exploration of clean areas
+
+#### Performance Tracking:
+- Monitors cleaning efficiency
+- Tracks visited locations
+- Detects and handles movement loops
+- Maintains exploration statistics
+
+### 3. Extended Route Finding Agent OSM Application
 The `ExtendedRouteFindingAgentOsmApp` (`aimax-osm/src/main/java/aimax/osm/gui/fx/applications/ExtendedRouteFindingAgentOsmApp.java`) enhances the original route finding application with:
 - Multiple goal support (more than two markers)
 - Visual search space exploration (highlighted expanded nodes)
@@ -21,7 +55,7 @@ The `ExtendedRouteFindingAgentOsmApp` (`aimax-osm/src/main/java/aimax/osm/gui/fx
 - Improved state visualization and tracking
 - Java 17 compatibility with updated JavaFX integration
 
-### 3. Time-Dependent Route Planning (by Kidis Sako)
+### 4. Time-Dependent Route Planning (by Kidis Sako)
 The `TimeDependentRouteCalculator` (`aimax-osm/src/main/java/aimax/osm/routing/TimeDependentRouteCalculator.java`) extends the base route calculator with:
 - Time-based routing using estimated travel times
 - Speed estimates for different road types (motorway, trunk, primary, etc.)
@@ -29,7 +63,7 @@ The `TimeDependentRouteCalculator` (`aimax-osm/src/main/java/aimax/osm/routing/T
 - Travel time calculation and formatting utilities
 - Support for both distance and time-based route optimization
 
-### 4. Sudoku CSP Solver
+### 5. Sudoku CSP Solver
 The Sudoku implementation demonstrates advanced Constraint Satisfaction Problem (CSP) solving techniques with three main components:
 
 #### Core Implementation (`SudokuCSP`)
